@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}About - QuizBiz{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2 class="display-4 text-primary">About QuizBiz</h2>
+                <p class="lead text-muted">
+                    QuizBiz is a cutting-edge platform designed to make quiz creation, participation, and management easy and enjoyable.
+                </p>
+                <p class="text-dark">
+                    We use advanced AI algorithms to generate quizzes based on URLs and can create multiple types of questions. Whether you're a teacher, student, or just someone who loves quizzes, QuizBiz provides the tools you need to create and take fun and challenging quizzes.
+                </p>
+                <p class="text-dark">
+                    We aim to create a community-driven platform where users can share their quizzes and learn from each other. Join us today and start exploring the world of quizzes!
+                </p>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'images/about.png' %}" alt="QuizBiz" class="img-fluid rounded shadow-lg">
+            </div>
+        </div>
+    </div>
+{% endblock %}
