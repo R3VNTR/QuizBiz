@@ -1,0 +1,25 @@
+# Python bytecode
+*.pyc
+__pycache__/
+
+# Virtual environment
+env/
+venv/
+quizbiz_env/
+
+# Django database
+*.sqlite3
+
+# Sensitive files
+.env
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Logs
+*.log
