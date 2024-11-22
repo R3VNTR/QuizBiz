@@ -7,8 +7,10 @@
         <h1 class="display-4">Welcome to QuizBiz!</h1>
         <p class="lead">Your ultimate platform to create and take quizzes. Start exploring now!</p>
         <hr class="my-4">
-        <p>Get started by logging in or creating an account.</p>
-        <a class="btn btn-primary btn-lg" href="" role="button">Login</a>
-        <a class="btn btn-outline-primary btn-lg" href="" role="button">Register</a>
+        {% if not user.is_authenticated %}
+        <p>Get started by logging in or creating an account.</p>       
+        <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Login</a>
+        <a class="btn btn-outline-primary btn-lg" href="{% url 'register' %}" role="button">Register</a>
+        {% endif %}
     </div>
 {%endblock%}

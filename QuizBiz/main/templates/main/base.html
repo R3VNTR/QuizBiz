@@ -41,15 +41,24 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'about' %}">About</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Logout</a>
-                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <img src="{% if user.profile_picture %}{{ user.profile_picture.url }}{% else %}{% static 'images/profile-placeholder.png' %}{% endif %}" alt="Profile" class="rounded-circle" style="width: 30px; height: 30px;"> 
+                                {{ user.username }}
+                            </a>                            
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
