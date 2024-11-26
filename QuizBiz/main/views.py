@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from quiz.models import Quiz
 
 
 def index(request):
-    return render(request, 'main/index.html')
+    quizzes = Quiz.objects.all()
+    return render(request, 'main/index.html', {'quizzes': quizzes})
 
 
 def about(request):
