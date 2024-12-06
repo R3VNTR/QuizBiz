@@ -1,0 +1,57 @@
+{% extends 'main/base.html' %}
+{% block title %} Take Quiz {% endblock%}
+{% block content %}
+<div class="container mt-4" style="margin-bottom: 150px;">
+    <div class="text-center">
+        <h1 class="display-4">{{ quiz.title }}</h1>
+        <p class="text-muted">{{ quiz.description }}</p>
+    </div>
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        
+        <div class="card shadow-lg mb-4">
+            <div class="card-header bg-primary text-white">
+                <h4>Questions</h4>
+            </div>
+            <div class="card-body">
+                {% for question in quiz.questions.all %}
+                    <div class="mb-4">
+                        <p><strong>Q{{ forloop.counter }}: {{ question.text }}</strong></p>                      
+                        {% if quiz.question_type == "mcq" %}
+                            {% for option in question.options %}
+                                <div class="form-check">
+                                    <input type="radio" name="question_{{ question.id }}" id="option_{{ forloop.counter }}" 
+                                        value="{{ option }}" class="form-check-input">
+                                    <label for="option_{{ forloop.counter }}" class="form-check-label">
+                                        {{ option }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        {% elif quiz.question_type == "tf" %}
+                            <div class="form-check">
+                                <input type="radio" name="question_{{ question.id }}" id="option_true" value="True" class="form-check-input">
+                                <label for="option_true" class="form-check-label">True</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" name="question_{{ question.id }}" id="option_false" value="False" class="form-check-input">
+                                <label for="option_false" class="form-check-label">False</label>
+                            </div> 
+                        {% else %}
+                            <div class="form-group">
+                                <input type="text" name="question_{{ question.id }}" 
+                                       placeholder="Type your answer here..." 
+                                       class="form-control">
+                            </div>
+                        {% endif %}
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-lg btn-success px-4">Submit Quiz</button>
+            <a href="{% url 'home' %}" class="btn btn-lg btn-secondary px-4">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

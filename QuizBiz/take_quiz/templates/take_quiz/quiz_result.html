@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+{% block title %} Results {% endblock%}
+{% block content %}
+<div class="container mt-4" style="margin-bottom: 150px;">
+    <div class="card shadow-sm">
+        <div class="card-header text-center bg-success text-white">
+            <h2>Quiz Result</h2>
+        </div>
+        <div class="card-body text-center">
+            <h3>{{ attempt.quiz.title }}</h3>
+            <p><strong>Score:</strong> {{ score_percentage }}%</p>
+
+            <div class="mt-4">
+                <h4>Your Answers:</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Your Answer</th>
+                            <th>Correct Answer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user_answer in user_answers %}
+                        <tr class="{% if user_answer.is_correct %}table-success{% else %}table-danger{% endif %}">
+                            <td>{{ user_answer.question.text }}</td>
+                            <td>{{ user_answer.selected_answer }}</td>
+                            <td>{{ user_answer.question.correct_answer }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

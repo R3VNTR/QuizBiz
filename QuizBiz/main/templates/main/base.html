@@ -48,8 +48,8 @@
                     </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <img src="{% if user.profile_picture %}{{ user.profile_picture.url }}{% else %}{% static 'images/profile-placeholder.png' %}{% endif %}" alt="Profile" class="rounded-circle" style="width: 30px; height: 30px;"> 
+                            <a class="nav-link" href="{% url 'user_profile' %}">
+                                <img src="{% if user.profile_picture %}{{ user.profile_picture.url }}{% else %}{% static 'images/user.png' %}{% endif %}" alt="Profile" class="rounded-circle" style="width: 30px; height: 30px;"> 
                                 {{ user.username }}
                             </a>                            
                         </li>

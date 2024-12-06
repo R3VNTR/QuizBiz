@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse
+from take_quiz.models import UserQuizAttempt
+from quiz.models import Quiz
 
 
 def register(request):
@@ -39,3 +41,14 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('home')
+
+
+@login_required
+def profile(request):
+    quiz_attempts = UserQuizAttempt.objects.filter(user=request.user)
+    created_quizzes = Quiz.objects.filter(created_by=request.user)
+    return render(request, 'user/profile.html', {
+        'user': request.user,
+        'quiz_attempts': quiz_attempts,
+        'created_quizzes': created_quizzes,
+    })
